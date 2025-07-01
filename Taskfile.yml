@@ -1,0 +1,50 @@
+version: '3'
+
+tasks:
+  select:
+    desc: "🔧 Root menu: Select domain and task"
+    silent: true
+    cmds:
+      - |
+        DOMAIN=$(echo -e "nats\nmessaging" | gum choose)
+        case "$DOMAIN" in
+          nats)
+            CHOICE=$(echo -e "foo\nbar" | gum choose)
+            case "$CHOICE" in
+              foo) task nats_foo ;;
+              bar) task nats_bar ;;
+            esac
+            ;;
+          messaging)
+            CHOICE=$(echo -e "foo\nbar" | gum choose)
+            case "$CHOICE" in
+              foo) task messaging_foo ;;
+              bar) task messaging_bar ;;
+            esac
+            ;;
+        esac
+
+  default:
+    desc: "📂 (Default) Run the domain/task selector"
+    cmds:
+      - task: select
+
+  nats_foo:
+    desc: "NATS: Foo task"
+    cmds:
+      - echo "You selected nats_foo!"
+
+  nats_bar:
+    desc: "NATS: Bar task"
+    cmds:
+      - echo "You selected nats_bar!"
+
+  messaging_foo:
+    desc: "Messaging: Foo task"
+    cmds:
+      - echo "You selected messaging_foo!"
+
+  messaging_bar:
+    desc: "Messaging: Bar task"
+    cmds:
+      - echo "You selected messaging_bar!"
