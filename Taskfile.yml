@@ -1,34 +1,65 @@
 version: '3'
 
+env:
+  ENV: prototyping
+
+dotenv: ['.env']
+
+
 tasks:
   select:
-    desc: "🔧 Root menu: Select domain and task"
+    desc: "🔧 Root menu: Choose domain to explore tasks"
     silent: true
     cmds:
       - |
-        DOMAIN=$(echo -e "nats\nmessaging" | gum choose)
+        DOMAIN=$(echo -e "nats\nmessaging\ndocker\ndev" | gum choose)
         case "$DOMAIN" in
-          nats)
-            CHOICE=$(echo -e "foo\nbar" | gum choose)
-            case "$CHOICE" in
-              foo) task nats_foo ;;
-              bar) task nats_bar ;;
-            esac
-            ;;
-          messaging)
-            CHOICE=$(echo -e "foo\nbar" | gum choose)
-            case "$CHOICE" in
-              foo) task messaging_foo ;;
-              bar) task messaging_bar ;;
-            esac
-            ;;
+          nats) task select:nats ;;
+          messaging) task select:messaging ;;
+          docker) task select:docker ;;
+          dev) task select:dev ;;
         esac
+
+  # --- SELECTOR ZONES ---
+
+  select:nats:
+    desc: "🧠 Select a NATS task"
+    silent: true
+    cmds:
+      - |
+        CHOICE=$(grep '^  nats_' Taskfile.yml | cut -d: -f1 | sed 's/^  //' | gum choose)
+        task "$CHOICE"
+
+  select:messaging:
+    desc: "📨 Select a Messaging task"
+    silent: true
+    cmds:
+      - |
+        CHOICE=$(grep '^  messaging_' Taskfile.yml | cut -d: -f1 | sed 's/^  //' | gum choose)
+        task "$CHOICE"
+
+  select:docker:
+    desc: "🐳 Select a Docker task"
+    silent: true
+    cmds:
+      - |
+        CHOICE=$(grep '^  all_' Taskfile.yml | cut -d: -f1 | sed 's/^  //' | gum choose)
+        task "$CHOICE"
+
+  select:dev:
+    desc: "🐳 Select a Docker task"
+    silent: true
+    cmds:
+      - |
+        CHOICE=$(grep '^  dev_' Taskfile.yml | cut -d: -f1 | sed 's/^  //' | gum choose)
+        task "$CHOICE"
 
   default:
     desc: "📂 (Default) Run the domain/task selector"
     cmds:
       - task: select
 
+  # --- NATS TASKS ---
   nats_foo:
     desc: "NATS: Foo task"
     cmds:
@@ -39,6 +70,26 @@ tasks:
     cmds:
       - echo "You selected nats_bar!"
 
+  nats_restart:
+    desc: "🔁 Restart NATS and ping"
+    cmds:
+      - task docker_nats_down
+      - task nats_render_conf
+      - task docker_nats_up
+
+  nats_ping:
+    desc: "🔁 Restart NATS and ping"
+    cmds:
+      - echo "Pinging NATS using ${NATS_USERNAME} and ${NATS_PASSWORD}"
+      - nats --user ${NATS_USERNAME} --password ${NATS_PASSWORD} server info --server localhost:4222
+
+  nats_restart_and_ping:
+    desc: "🔁 Restart NATS and ping"
+    cmds:
+      - task nats_restart
+      - task nats_ping
+
+  # --- MESSAGING TASKS ---
   messaging_foo:
     desc: "Messaging: Foo task"
     cmds:
@@ -48,3 +99,66 @@ tasks:
     desc: "Messaging: Bar task"
     cmds:
       - echo "You selected messaging_bar!"
+
+  # --- DOCKER TASKS ---
+
+  all_up:
+    desc: "🚀 Bring all Docker services up"
+    cmds:
+      - docker compose -f infra/docker-compose.yml up -d
+
+  all_down:
+    desc: "🛑 Bring all Docker services down"
+    cmds:
+      - docker compose -f infra/docker-compose.yml down
+
+  docker_nats_down:
+    desc: "🛑 Stop NATS container"
+    cmds:
+      - docker compose -f infra/docker-compose.yml stop nats
+
+  docker_nats_up:
+    desc: "🚀 Start NATS container"
+    cmds:
+      - docker compose -f infra/docker-compose.yml up -d nats
+
+
+  # --- Dev Ops ---
+  load_env:
+    desc: "🔐 Load environment variables from .env"
+    silent: true
+    cmds:
+      - |
+          set -a
+          source .env
+          set +a
+
+  render_template:
+    desc: "🛠️ Render a template file using envsubst"
+    summary: "Usage: task render_template SOURCE=... DEST=..."
+    silent: true
+    requires:
+      vars: ["SOURCE", "DEST"]
+    cmds:
+      - |
+          set -a
+          source .env
+          set +a
+          envsubst < "{{.SOURCE}}" > "{{.DEST}}"
+          echo "rendered {{.DEST}}"
+
+  nats_render_conf:
+    desc: "📄 Render NATS config from template"
+    cmds:
+      - task: render_template
+        vars:
+          SOURCE: "infra/nats/nats.template.conf"
+          DEST: "infra/nats/nats.conf"
+
+  # --- Dev Ops ---
+   
+  dev_env_test:
+    desc: "Testing environment variables"
+    silent: true
+    cmds:
+      - echo ${NATS_USERNAME}

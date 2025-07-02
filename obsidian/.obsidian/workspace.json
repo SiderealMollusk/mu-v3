@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Restart Dev Environment.md",
+                "file": "Security Flaws.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Restart Dev Environment"
+              "title": "Security Flaws"
             }
           }
         ],
@@ -109,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Restart Dev Environment.md",
+                "file": "Security Flaws.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Restart Dev Environment"
+              "title": "Backlinks for Security Flaws"
             }
           },
           {
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Restart Dev Environment.md",
+                "file": "Security Flaws.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Restart Dev Environment"
+              "title": "Outgoing links from Security Flaws"
             }
           },
           {
@@ -157,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Restart Dev Environment.md",
+                "file": "Security Flaws.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Restart Dev Environment"
+              "title": "Outline of Security Flaws"
             }
           }
         ]
@@ -185,9 +185,13 @@
   },
   "active": "fa4ba30d0ec75690",
   "lastOpenFiles": [
-    "Architecture.md",
+    "Task Stack.md",
+    "Security Flaws.md",
+    "When things go wrong.md",
+    "TaskFile system.md",
+    "Making it go.md",
     "Restart Dev Environment.md",
     "Mu-v3.md",
-    "Task Stack.md"
+    "Architecture.md"
   ]
 }
