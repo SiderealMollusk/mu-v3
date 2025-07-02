@@ -80,8 +80,8 @@ tasks:
   nats_ping:
     desc: "🔁 Restart NATS and ping"
     cmds:
-      - echo "Pinging NATS using ${NATS_USERNAME} and ${NATS_PASSWORD}"
-      - nats --user ${NATS_USERNAME} --password ${NATS_PASSWORD} server info --server localhost:4222
+      - echo "Pinging NATS using ${NATS_SYS_USER} and ${NATS_SYS_USER_PASSWORD}"
+      - nats --user ${NATS_SYS_USER} --password ${NATS_SYS_USER_PASSWORD} server info --server localhost:4222
 
   nats_restart_and_ping:
     desc: "🔁 Restart NATS and ping"
@@ -161,4 +161,4 @@ tasks:
     desc: "Testing environment variables"
     silent: true
     cmds:
-      - echo ${NATS_USERNAME}
+      - echo ${NATS_SYS_USER}

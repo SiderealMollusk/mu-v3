@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Security Flaws.md",
+                "file": "NATS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Security Flaws"
+              "title": "NATS"
             }
           }
         ],
@@ -109,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Security Flaws.md",
+                "file": "NATS.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Security Flaws"
+              "title": "Backlinks for NATS"
             }
           },
           {
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Security Flaws.md",
+                "file": "NATS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Security Flaws"
+              "title": "Outgoing links from NATS"
             }
           },
           {
@@ -157,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Security Flaws.md",
+                "file": "NATS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Security Flaws"
+              "title": "Outline of NATS"
             }
           }
         ]
@@ -185,8 +185,9 @@
   },
   "active": "fa4ba30d0ec75690",
   "lastOpenFiles": [
-    "Task Stack.md",
     "Security Flaws.md",
+    "NATS.md",
+    "Task Stack.md",
     "When things go wrong.md",
     "TaskFile system.md",
     "Making it go.md",
