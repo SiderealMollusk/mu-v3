@@ -129,7 +129,17 @@ tasks:
           SOURCE: "infra/nats/nats.template.conf"
           DEST: "infra/nats/nats.conf"
 
-  # --- Dev Ops ---
+  # --- Dev ---
+
+  dev_mock_emit_once:
+    desc: "📤 Emit a single mock event"
+    cmds:
+      - npx ts-node tools/mock-emmiter.ts
+
+  dev_mock_emit_loop:
+    desc: "🔁 Emit mock events repeatedly"
+    cmds:
+      - while true; do npx ts-node tools/mock-emmiter.ts; sleep 1; done
    
   dev_env_test:
     desc: "Testing environment variables"
