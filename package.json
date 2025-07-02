@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/SiderealMollusk/mu-v3#readme",
   "devDependencies": {
-    "taskfile": "^0.10.0"
+    "@types/node": "^24.0.10",
+    "taskfile": "^0.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "nats": "^2.29.3"
   }
 }

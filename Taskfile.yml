@@ -12,7 +12,7 @@ tasks:
     silent: true
     cmds:
       - |
-        DOMAIN=$(echo -e "nats\nmessaging\ndocker\ndev" | gum choose)
+        DOMAIN=$(echo -e "nats\ndocker\ndev" | gum choose)
         case "$DOMAIN" in
           nats) task select:nats ;;
           messaging) task select:messaging ;;
@@ -28,14 +28,6 @@ tasks:
     cmds:
       - |
         CHOICE=$(grep '^  nats_' Taskfile.yml | cut -d: -f1 | sed 's/^  //' | gum choose)
-        task "$CHOICE"
-
-  select:messaging:
-    desc: "📨 Select a Messaging task"
-    silent: true
-    cmds:
-      - |
-        CHOICE=$(grep '^  messaging_' Taskfile.yml | cut -d: -f1 | sed 's/^  //' | gum choose)
         task "$CHOICE"
 
   select:docker:
@@ -60,16 +52,6 @@ tasks:
       - task: select
 
   # --- NATS TASKS ---
-  nats_foo:
-    desc: "NATS: Foo task"
-    cmds:
-      - echo "You selected nats_foo!"
-
-  nats_bar:
-    desc: "NATS: Bar task"
-    cmds:
-      - echo "You selected nats_bar!"
-
   nats_restart:
     desc: "🔁 Restart NATS and ping"
     cmds:
@@ -90,15 +72,7 @@ tasks:
       - task nats_ping
 
   # --- MESSAGING TASKS ---
-  messaging_foo:
-    desc: "Messaging: Foo task"
-    cmds:
-      - echo "You selected messaging_foo!"
 
-  messaging_bar:
-    desc: "Messaging: Bar task"
-    cmds:
-      - echo "You selected messaging_bar!"
 
   # --- DOCKER TASKS ---
 
