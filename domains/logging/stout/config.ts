@@ -6,14 +6,14 @@
  */
 
 // Required environment variables
-export const APP_ENV = '${APP_ENV}';
-export const DEBUG = '${LOGGING_STDOUT_VERBOSE}';
+export const APP_ENV = 'development';
+export const DEBUG = 'true';
 
 export const SERVICE_NAME = 'logging_stout';
 export const SERVICE_VERSION = '0.0.1';
 
 // NATS
-export const NATS_USERNAME = '${NATS_LOGGING_STDOUT_USERNAME}';
-export const NATS_PASSWORD = '${NATS_LOGGING_STDOUT_PASSWORD}';
-export const NATS_HOST = '${NATS_HOST}';
-export const NATS_PORT = parseInt('${NATS_PORT}', 10);
+export const NATS_USERNAME = 'logging_stout';
+export const NATS_PASSWORD = 'iXJB9M8E3pSx8NtQl5UB1xwzU2JkUNE1eihU4eGUjPNOziNrqo';
+export const NATS_HOST = 'localhost';
+export const NATS_PORT = parseInt('4222', 10);
