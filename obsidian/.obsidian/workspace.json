@@ -4,53 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "715bb6da7e73af31",
+        "id": "0be86e33a8b3c61e",
         "type": "tabs",
         "children": [
           {
-            "id": "aee7105c26e750ed",
+            "id": "214cd319e000988a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Mu-v3.md",
+                "file": "To Add a domain.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Mu-v3"
-            }
-          },
-          {
-            "id": "fa4ba30d0ec75690",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NATS.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "NATS"
-            }
-          },
-          {
-            "id": "67240f81379f7cb2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Making it go.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Making it go"
+              "title": "To Add a domain"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -123,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Making it go.md",
+                "file": "To Add a domain.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Making it go"
+              "title": "Backlinks for To Add a domain"
             }
           },
           {
@@ -142,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Making it go.md",
+                "file": "To Add a domain.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Making it go"
+              "title": "Outgoing links from To Add a domain"
             }
           },
           {
@@ -171,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Making it go.md",
+                "file": "To Add a domain.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Making it go"
+              "title": "Outline of To Add a domain"
             }
           }
         ]
@@ -197,17 +168,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "67240f81379f7cb2",
+  "active": "214cd319e000988a",
   "lastOpenFiles": [
-    "Task Stack.md",
-    "To Add a domain.md",
-    "NATS.md",
-    "Security Flaws.md",
     "When things go wrong.md",
-    "TaskFile system.md",
-    "Making it go.md",
-    "Restart Dev Environment.md",
+    "To Add a domain.md",
+    "Untitled.md",
+    "hj",
     "Mu-v3.md",
+    "NATS.md",
+    "TaskFile system.md",
+    "Task Stack.md",
+    "Making it go.md",
+    "Security Flaws.md",
+    "Restart Dev Environment.md",
     "Architecture.md"
   ]
 }
