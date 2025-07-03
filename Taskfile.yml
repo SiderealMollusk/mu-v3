@@ -15,7 +15,6 @@ tasks:
         DOMAIN=$(echo -e "nats\ndocker\ndev" | gum choose)
         case "$DOMAIN" in
           nats) task select:nats ;;
-          messaging) task select:messaging ;;
           docker) task select:docker ;;
           dev) task select:dev ;;
         esac
@@ -39,7 +38,7 @@ tasks:
         task "$CHOICE"
 
   select:dev:
-    desc: "🐳 Select a Docker task"
+    desc: "🛠️ Select a Dev task"
     silent: true
     cmds:
       - |
@@ -62,8 +61,8 @@ tasks:
   nats_ping:
     desc: "🔁 Restart NATS and ping"
     cmds:
-      - echo "Pinging NATS using ${NATS_SYS_USER} and ${NATS_SYS_USER_PASSWORD}"
-      - nats --user ${NATS_SYS_USER} --password ${NATS_SYS_USER_PASSWORD} server info --server localhost:4222
+      - echo "Pinging NATS using ${NATS_SYS_USER} and ${NATS_SYS_USER_PASSWORD} at ${NATS_HOST}:${NATS_PORT}"
+      - nats --user ${NATS_SYS_USER} --password ${NATS_SYS_USER_PASSWORD} server info --server ${NATS_HOST}:${NATS_PORT}
 
   nats_restart_and_ping:
     desc: "🔁 Restart NATS and ping"
@@ -115,11 +114,9 @@ tasks:
       vars: ["SOURCE", "DEST"]
     cmds:
       - |
-          set -a
-          source .env
-          set +a
-          envsubst < "{{.SOURCE}}" > "{{.DEST}}"
-          echo "rendered {{.DEST}}"
+        envsubst < "{{.SOURCE}}" > "{{.DEST}}"
+        echo
+        echo -e "\033[92mrendered {{.DEST}}\033[0m"
 
   nats_render_conf:
     desc: "📄 Render NATS config from template"
@@ -127,7 +124,7 @@ tasks:
       - task: render_template
         vars:
           SOURCE: "infra/nats/nats.template.conf"
-          DEST: "infra/nats/nats.conf"
+          DEST:   "infra/nats/nats.conf"
 
   # --- Dev ---
 
