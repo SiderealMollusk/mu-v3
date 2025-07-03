@@ -19,9 +19,11 @@
   "homepage": "https://github.com/SiderealMollusk/mu-v3#readme",
   "devDependencies": {
     "@types/node": "^24.0.10",
+    "@vitest/coverage-c8": "^0.33.0",
     "taskfile": "^0.10.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "nats": "^2.29.3"

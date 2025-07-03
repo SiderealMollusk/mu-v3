@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "To Add a domain.md",
+                "file": "_OPEN SECURITY ISSUES.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "To Add a domain"
+              "title": "_OPEN SECURITY ISSUES"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "To Add a domain.md",
+                "file": "_OPEN SECURITY ISSUES.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for To Add a domain"
+              "title": "Backlinks for _OPEN SECURITY ISSUES"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "To Add a domain.md",
+                "file": "_OPEN SECURITY ISSUES.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from To Add a domain"
+              "title": "Outgoing links from _OPEN SECURITY ISSUES"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "To Add a domain.md",
+                "file": "_OPEN SECURITY ISSUES.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of To Add a domain"
+              "title": "Outline of _OPEN SECURITY ISSUES"
             }
           }
         ]
@@ -170,16 +170,16 @@
   },
   "active": "214cd319e000988a",
   "lastOpenFiles": [
-    "When things go wrong.md",
+    "Task Stack.md",
     "To Add a domain.md",
+    "When things go wrong.md",
     "Untitled.md",
     "hj",
     "Mu-v3.md",
     "NATS.md",
     "TaskFile system.md",
-    "Task Stack.md",
     "Making it go.md",
-    "Security Flaws.md",
+    "_OPEN SECURITY ISSUES.md",
     "Restart Dev Environment.md",
     "Architecture.md"
   ]

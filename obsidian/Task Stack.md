@@ -19,3 +19,11 @@ Domains will define there own types, and other domains will cross over for that.
 Starting to work on the emmitter ... which means type script
 
 made an mock emitter, good enough to prove a logger works
+
+made a template domain
+
+wrote the NATS cross domain client.
+
+--
+
+starting to install testing framework

@@ -1,0 +1,1 @@
+// Entry point, expecting node ts app
