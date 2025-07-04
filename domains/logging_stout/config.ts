@@ -15,5 +15,5 @@ export const SERVICE_VERSION = '0.0.1';
 // NATS
 export const NATS_USERNAME = 'logging_stout';
 export const NATS_PASSWORD = 'iXJB9M8E3pSx8NtQl5UB1xwzU2JkUNE1eihU4eGUjPNOziNrqo';
-export const NATS_HOST = 'localhost';
+export const NATS_HOST = 'nats';
 export const NATS_PORT = parseInt('4222', 10);
