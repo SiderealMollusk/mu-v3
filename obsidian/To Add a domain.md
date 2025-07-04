@@ -1,54 +1,73 @@
-Adding a New Domain
+Folder Layout
 
-Where to Put Files:
-	•	Put all source code under: domains/<your-domain>/
-	•	Keep things self-contained: NATS handlers, business logic, types, etc.
+- All source code goes under: domains//
+    
+- Structure it like this:
+    
+    domains/
+    
+    /
+    
+    adapters/          ← NATS handlers (formerly called handlers)
+    
+    ports/
+    
+    inbound.ts       ← interfaces like HandleInboxMessage
+    
+    outbound.ts      ← interfaces like MessageSender
+    
+    services/          ← domain logic: pure functions, rules, transitions
+    
+    models/            ← domain-specific types
+    
 
-Taskfile Setup:
-	•	In the selector, add your domain to the list of options (look for the “echo -e” block).
-	•	Add a select:<your-domain> entry. It should:
-	•	Use grep to find tasks that start with <your-domain>_
-	•	Let the user choose one and then run it
-	•	Make sure all your tasks are named like: <your-domain>_something
+  
 
-Templates and Environment Variables:
-	•	If you have config files, use the shared render_template task.
-	•	Add any new environment variables to .env
-	•	Optional: make a .env.template file to document them
-# Adding a New Domain
+Taskfile Integration
 
-## Folder Layout
+- In the main “task select”, add your domain name to the echo -e block
+    
+- Add a task called select:
+    
+    - Use grep to find tasks starting with _
+        
+    - Let the user pick one with a selector like fzf or gum choose
+        
+    
+- Ensure all task names follow the pattern: _
+    
 
-- Put all source code under: `domains/<your-domain>/`
-- Keep it self-contained: handlers, ports, business logic, types, etc.
+  
 
-## Taskfile Integration
+Config Templates and Environment
 
-- In the main Taskfile selector, add your domain to the `echo -e` block so it shows up in the UI.
-- Add a `select:<your-domain>` task:
-  - It should use `grep` to list tasks starting with `<your-domain>_`
-  - Let the user pick and run one
-- Name your tasks like `<your-domain>_<action>`
+- If your domain uses a config file:
+    
+    - Create a config.template.ts
+        
+    - Use the shared render_template task to generate config.ts
+        
+    
+- Add required keys to .env
+    
+- Optionally document expected values in .env.template
+    
 
-## Config Templates and Environment
+  
 
-- If your domain uses config files, use the shared `render_template` task
-- Define env vars in `.env`, and document them in `.env.template` if needed
+Conventions Reminder
 
-## Conventions
+- Domains should be self-contained
+    
+- Prefer pure functions in services/
+    
+- Use ports to isolate interface logic
+    
+- Adapters implement ports
+    
+- Avoid direct cross-domain access; always route through ports
+    
 
-domains/
+  
 
-  inbox/
-
-    adapters/          <- NATS handlers (formerly called handlers)
-
-    ports/
-
-      inbound.ts       <- interfaces like HandleInboxMessage
-
-      outbound.ts      <- interfaces like MessageSender
-
-    services/          <- domain logic: pure functions, rules, state transitions
-
-    models/            <- types specific to this domain
+This format is future-scaffoldable. Each step corresponds to something a CLI script could automate. Let me know when you want to turn this into runnable tasks.

@@ -12,12 +12,20 @@ tasks:
     silent: true
     cmds:
       - |
-        DOMAIN=$(echo -e "nats\ndocker\ndev" | gum choose)
+        DOMAIN=$(echo -e "nats\nlogging\ndocker\ndev" | gum choose)
         case "$DOMAIN" in
           nats) task select:nats ;;
+          logging) task select:logging ;;
           docker) task select:docker ;;
           dev) task select:dev ;;
         esac
+  select:logging:
+    desc: "🪵 Select a logging task"
+    silent: true
+    cmds:
+      - |
+        CHOICE=$(grep '^  logging_' Taskfile.yml | cut -d: -f1 | sed 's/^  //' | gum choose)
+        task "$CHOICE"
 
   # --- SELECTOR ZONES ---
 
@@ -34,7 +42,7 @@ tasks:
     silent: true
     cmds:
       - |
-        CHOICE=$(grep '^  all_' Taskfile.yml | cut -d: -f1 | sed 's/^  //' | gum choose)
+        CHOICE=$(grep '^  docker_' Taskfile.yml | cut -d: -f1 | sed 's/^  //' | gum choose)
         task "$CHOICE"
 
   select:dev:
@@ -75,15 +83,17 @@ tasks:
 
   # --- DOCKER TASKS ---
 
-  all_up:
+  docker_all_up:
     desc: "🚀 Bring all Docker services up"
     cmds:
-      - docker compose -f infra/docker-compose.yml up -d
+      - task: docker_nats_up
+      - task: docker_logging_stout_up
 
-  all_down:
+  docker_all_down:
     desc: "🛑 Bring all Docker services down"
     cmds:
-      - docker compose -f infra/docker-compose.yml down
+      - task: docker_nats_down
+      - task: docker_logging_stout_down
 
   docker_nats_down:
     desc: "🛑 Stop NATS container"
@@ -93,7 +103,28 @@ tasks:
   docker_nats_up:
     desc: "🚀 Start NATS container"
     cmds:
+      - task: nats_render_conf
       - docker compose -f infra/docker-compose.yml up -d nats
+
+  docker_logging_stout_up:
+    desc: "🚀 Start logging_stout container"
+    cmds:
+      - task: logging_stout_render_conf
+      - docker compose -f infra/docker-compose.yml up -d logging_stout
+
+  docker_nuke:
+    desc: "💣 Stop and remove all Docker containers, volumes, and networks"
+    cmds:
+      - |
+        echo "WARNING: This will nuke all Docker containers, volumes, and networks related to this project."
+        read -p "Are you absolutely sure? (type 'nuke' to confirm): " CONFIRM
+        if [ "$CONFIRM" = "nuke" ]; then
+          docker compose -f infra/docker-compose.yml down -v --remove-orphans
+          docker container prune -f
+          docker network prune -f
+        else
+          echo "Aborted."
+        fi
 
 
   # --- Dev Ops ---
@@ -126,6 +157,14 @@ tasks:
           SOURCE: "infra/nats/nats.template.conf"
           DEST:   "infra/nats/nats.conf"
 
+  logging_stout_render_conf:
+    desc: "📄 Render logging_stout config from template"
+    cmds:
+      - task: render_template
+        vars:
+          SOURCE: "domains/logging/stout/config.template.ts"
+          DEST:   "domains/logging/stout/config.ts"
+
   # --- Dev ---
 
   dev_mock_emit_once:
@@ -143,3 +182,24 @@ tasks:
     silent: true
     cmds:
       - echo ${NATS_SYS_USER}
+  docker_logging_stout_down:
+    desc: "🛑 Stop logging_stout container"
+    cmds:
+      - docker compose -f infra/docker-compose.yml stop logging_stout
+  dev_kill_4222:
+    desc: "🧨 Kill whatever process is using port 4222"
+    cmds:
+      - |
+        echo "Checking for process on port 4222..."
+        lsof -i :4222 || echo "No output from lsof"
+        PID=$(lsof -ti :4222)
+        echo "Resolved PID: $PID"
+        if [ -n "$PID" ]; then
+          echo "Attempting to kill process $PID"
+          kill -9 $PID
+          echo "Process $PID killed."
+        else
+          echo "No process found on port 4222."
+        fi
+
+

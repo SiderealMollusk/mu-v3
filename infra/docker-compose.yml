@@ -1,3 +1,4 @@
+name: mu3
 services:
   nats:
     image: nats
@@ -7,3 +8,12 @@ services:
     volumes:
       - ./nats/nats.conf:/etc/nats/nats.conf:ro
     command: ["-c", "/etc/nats/nats.conf"]
+    environment:
+      - NODE_ENV=${NODE_ENV}
+  logging_stout:
+    build:
+      context: ../domains/logging/stout
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      - NODE_ENV=${NODE_ENV}
