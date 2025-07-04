@@ -1,0 +1,14 @@
+# syntax=docker/dockerfile:1
+FROM node:22-alpine
+
+# Copy shared code first
+WORKDIR /mu3/shared
+COPY domains/shared /mu3/shared
+RUN npm install
+
+# Copy app code and install its deps
+WORKDIR /mu3/app
+COPY domains/logging_stout /mu3/app
+RUN npm install
+
+CMD ["npm", "run", "dev"]

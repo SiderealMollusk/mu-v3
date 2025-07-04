@@ -5,7 +5,7 @@
   "main": "services/index.ts",
   "scripts": {
     "start": "ts-node --transpile-only services/index.ts",
-    "dev": "NODE_ENV=development ts-node --transpile-only services/index.ts",
+    "dev": "ts-node-dev --poll --respawn --transpile-only --ignore-watch node_modules services/index.ts",
     "build": "tsc",
     "test": "vitest"
   },
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3",
     "vitest": "^1.0.0"
   }

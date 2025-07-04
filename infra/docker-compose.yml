@@ -10,10 +10,16 @@ services:
     command: ["-c", "/etc/nats/nats.conf"]
     environment:
       - NODE_ENV=${NODE_ENV}
+
   logging_stout:
     build:
-      context: ../domains/logging/stout
+      context: ../
+      dockerfile: domains/logging_stout/dockerfile
     restart: unless-stopped
-    working_dir: /app
+    working_dir: /mu3/app
+    volumes:
+      - ../domains/logging_stout:/mu3/app
+      - ../domains/shared:/mu3/shared
     environment:
       - NODE_ENV=${NODE_ENV}
+    command: npm run dev
