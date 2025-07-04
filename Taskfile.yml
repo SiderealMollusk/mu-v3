@@ -162,8 +162,8 @@ tasks:
     cmds:
       - task: render_template
         vars:
-          SOURCE: "domains/logging/stout/config.template.ts"
-          DEST:   "domains/logging/stout/config.ts"
+          SOURCE: "domains/logging_stout/config.template.ts"
+          DEST:   "domains/logging_stout/config.ts"
 
   # --- Dev ---
 
