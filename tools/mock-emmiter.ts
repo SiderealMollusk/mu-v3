@@ -1,5 +1,8 @@
 
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import { connect, StringCodec } from 'nats';
 
 async function main() {
@@ -7,7 +10,11 @@ async function main() {
   const subject = process.env.NATS_SUBJECT || 'mock.test';
   const sc = StringCodec();
 
-  const nc = await connect({ servers: server });
+  const nc = await connect({
+    servers: server,
+    user: process.env.NATS_TOOLING_USERNAME,
+    pass: process.env.NATS_TOOLING_PASSWORD,
+  });
   console.log(`🔌 Connected to ${server}`);
 
   const message = { hello: 'world', timestamp: new Date().toISOString() };
