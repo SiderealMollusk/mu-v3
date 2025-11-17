@@ -1,0 +1,35 @@
+# Advanced Issue to Project Automation (Example Configuration)
+# This is an example file showing more advanced automation options.
+# Rename to .yml to enable (and disable add-to-project.yml to avoid duplicates)
+
+name: Add Issue to Project (Advanced)
+
+on:
+  issues:
+    types:
+      - opened
+      - reopened
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  add-to-project:
+    name: Add item to project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add to project
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/users/SiderealMollusk/projects/1
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          # Optional: Add labels to filter which items get added
+          # labeled: bug,enhancement
+          
+  # Future automation ideas:
+  # - Auto-assign based on labels
+  # - Set status field based on issue type
+  # - Add to different projects based on labels
+  # - Notify team members on Slack/Discord
+  # - Create related documentation issues
+  # - Link to parent epic/milestone
